@@ -7,8 +7,6 @@ This service provides two main endpoints:
 * `POST /` — Create a shortened URL
 * `GET /{hash}` — Retrieve and redirect to the original long URL
 
-___
-
 ## Architecture Overview
 
 ```
@@ -22,7 +20,6 @@ Client ─▶ API Gateway (HTTP API)
                ▼
           DynamoDB (URLTable)
 ```
-___
 
 ## Configuration
 
@@ -32,15 +29,11 @@ ___
 **Region:** `eu-central-1`
 **Stage:** `dev`
 
-___
-
 ## Environment Variables
 
 | Variable    | Description                                        |
 | ----------- | -------------------------------------------------- |
 | `URL_TABLE` | Name of the DynamoDB table storing shortened URLs. |
-
-___
 
 ## Packaging & Plugins
 
@@ -53,8 +46,6 @@ package:
 plugins:
   - serverless-bundle
 ```
-
-___
 
 ## IAM Permissions
 
@@ -71,8 +62,6 @@ iam:
         Resource:
           - Fn::GetAtt: [ URLTable, Arn ]
 ```
-
-___
 
 ## Functions
 
@@ -120,8 +109,6 @@ HTTP/1.1 302 Found
 Location: https://example.com
 ```
 
-___
-
 ## DynamoDB Table Definition
 
 | Attribute | Type | Key   | Description                               |
@@ -153,8 +140,6 @@ Resources:
       TableName: ${self:provider.environment.URL_TABLE}
 ```
 
-___
-
 ## Deployment
 
 ### Prerequisites
@@ -174,8 +159,6 @@ This will:
 * Create the Lambda functions.
 * Provision DynamoDB.
 * Deploy an API Gateway endpoint.
-
-___
 
 ### Removal
 
