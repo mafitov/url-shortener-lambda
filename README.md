@@ -1,4 +1,4 @@
-# URL Shortener Lambda
+# URL Shortener
 
 A lightweight **Serverless URL Shortener** built with **AWS Lambda**, **API Gateway (HTTP API)**, and **DynamoDB**, using the **Serverless Framework v3**.
 
@@ -23,7 +23,7 @@ Client ─▶ API Gateway (HTTP API)
 
 ## Configuration
 
-**Service name:** `url-shortener-lambda`
+**Service name:** `url-shortener`
 **Framework version:** `3`
 **Runtime:** `Node.js 20.x`
 **Region:** `eu-central-1`

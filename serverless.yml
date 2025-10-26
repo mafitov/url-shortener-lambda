@@ -1,4 +1,4 @@
-service: url-shortener-lambda
+service: url-shortener
 frameworkVersion: '3'
 package:
     individually: true
