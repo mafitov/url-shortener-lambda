@@ -1,0 +1,21 @@
+{
+    "name": "url-shortener-lambda",
+    "version": "1.0.0",
+    "description": "URL Shortener",
+    "author": "Maksim Afitau",
+    "private": false,
+    "scripts": {
+        "deploy": "sls deploy",
+        "remove": "sls remove"
+    },
+    "dependencies": {
+        "@aws-lambda/http": "^1.0.1",
+        "@aws-sdk/util-dynamodb": "^3.868.0",
+        "aws-sdk": "^2.1692.0",
+        "joi": "^18.0.1",
+        "short-unique-id": "^5.3.2"
+    },
+    "devDependencies": {
+        "serverless-bundle": "^6.3.1"
+    }
+}

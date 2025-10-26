@@ -1,0 +1,53 @@
+service: url-shortener-lambda
+frameworkVersion: '3'
+package:
+    individually: true
+plugins:
+    - serverless-bundle
+provider:
+    name: aws
+    runtime: nodejs20.x
+    stage: dev
+    region: eu-central-1
+    lambdaHashingVersion: 20201221
+    environment:
+        URL_TABLE: ${self:service}-${sls:stage}-urls
+    iam:
+        role:
+            statements:
+                -   Effect: Allow
+                    Action:
+                        - dynamodb:GetItem
+                        - dynamodb:PutItem
+                    Resource:
+                        -   Fn::GetAtt: [ URLTable, Arn ]
+functions:
+    -   url-create:
+            handler: src/functions/url-create.handler
+            events:
+                -   httpApi:
+                        path: /
+                        method: post
+    -   url-get:
+            handler: src/functions/url-get.handler
+            events:
+                -   httpApi:
+                        path: /{hash}
+                        method: get
+resources:
+    -   Resources:
+            URLTable:
+                Type: 'AWS::DynamoDB::Table'
+                DeletionPolicy: Delete
+                Properties:
+                    AttributeDefinitions:
+                        -   AttributeName: hash
+                            AttributeType: S
+                    KeySchema:
+                        -   AttributeName: hash
+                            KeyType: HASH
+                    TimeToLiveSpecification:
+                        AttributeName: ttl
+                        Enabled: true
+                    BillingMode: PAY_PER_REQUEST
+                    TableName: ${self:provider.environment.URL_TABLE}
