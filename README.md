@@ -1,4 +1,4 @@
-## URL Shortener Lambda
+# URL Shortener Lambda
 
 A lightweight **Serverless URL Shortener** built with **AWS Lambda**, **API Gateway (HTTP API)**, and **DynamoDB**, using the **Serverless Framework v3**.
 
@@ -7,7 +7,9 @@ This service provides two main endpoints:
 * `POST /` — Create a shortened URL
 * `GET /{hash}` — Retrieve and redirect to the original long URL
 
-### Architecture Overview
+___
+
+## Architecture Overview
 
 ```
 Client ─▶ API Gateway (HTTP API)
@@ -20,8 +22,9 @@ Client ─▶ API Gateway (HTTP API)
                ▼
           DynamoDB (URLTable)
 ```
+___
 
-### Configuration
+## Configuration
 
 **Service name:** `url-shortener-lambda`
 **Framework version:** `3`
@@ -29,13 +32,17 @@ Client ─▶ API Gateway (HTTP API)
 **Region:** `eu-central-1`
 **Stage:** `dev`
 
-### Environment Variables
+___
+
+## Environment Variables
 
 | Variable    | Description                                        |
 | ----------- | -------------------------------------------------- |
 | `URL_TABLE` | Name of the DynamoDB table storing shortened URLs. |
 
-### Packaging & Plugins
+___
+
+## Packaging & Plugins
 
 This service uses the `serverless-bundle` plugin to optimize and package functions individually for deployment.
 
@@ -47,7 +54,9 @@ plugins:
   - serverless-bundle
 ```
 
-### IAM Permissions
+___
+
+## IAM Permissions
 
 Each function runs with a minimal IAM role allowing access to DynamoDB operations required by the service.
 
@@ -63,7 +72,9 @@ iam:
           - Fn::GetAtt: [ URLTable, Arn ]
 ```
 
-### Functions
+___
+
+## Functions
 
 ### 1. `url-create`
 
@@ -72,7 +83,7 @@ iam:
 
 Creates a new short URL entry in DynamoDB.
 
-#### Example Request
+### Example Request
 
 ```bash
 curl -X POST https://<api-id>.execute-api.eu-central-1.amazonaws.com/ \
@@ -80,7 +91,7 @@ curl -X POST https://<api-id>.execute-api.eu-central-1.amazonaws.com/ \
   -d '{"url": "https://example.com"}'
 ```
 
-#### Example Response
+### Example Response
 
 ```json
 {
@@ -96,20 +107,22 @@ curl -X POST https://<api-id>.execute-api.eu-central-1.amazonaws.com/ \
 Fetches the original URL from DynamoDB using the short hash.
 If found, it redirects to the long URL.
 
-#### Example Request
+### Example Request
 
 ```bash
 curl -i https://<api-id>.execute-api.eu-central-1.amazonaws.com/abc123
 ```
 
-#### Example Response
+### Example Response
 
 ```
 HTTP/1.1 302 Found
 Location: https://example.com
 ```
 
-### DynamoDB Table Definition
+___
+
+## DynamoDB Table Definition
 
 | Attribute | Type | Key   | Description                               |
 | --------- | ---- | ----- | ----------------------------------------- |
@@ -140,7 +153,9 @@ Resources:
       TableName: ${self:provider.environment.URL_TABLE}
 ```
 
-### Deployment
+___
+
+## Deployment
 
 ### Prerequisites
 
@@ -159,6 +174,8 @@ This will:
 * Create the Lambda functions.
 * Provision DynamoDB.
 * Deploy an API Gateway endpoint.
+
+___
 
 ### Removal
 
