@@ -11,10 +11,10 @@ exports.handler = async (event) => {
             return response.validationError(validation.error.details[0].message);
         }
 
-        const urlResult = await dynamoDb.createShortURL(data.longUrl, data.ttl);
+        const urlResult = await dynamoDb.createShortUrl(data.longUrl, data.ttl);
 
         return response.created({
-            shortURL: `https://${event.requestContext.domainName}/${urlResult.Item.hash}`
+            shortUrl: `https://${event.requestContext.domainName}/${urlResult.Item.hash}`
         });
     } catch (error) {
         return response.serverError(error);

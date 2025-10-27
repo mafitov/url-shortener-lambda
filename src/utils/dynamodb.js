@@ -14,7 +14,7 @@ export default {
             })
             .promise();
     },
-    createShortURL: async (longUrl, ttl) => {
+    createShortUrl: async (longUrl, ttl) => {
         const hash = new ShortUniqueId({ length: 10 });
         const params = {
             TableName: process.env.URL_TABLE,

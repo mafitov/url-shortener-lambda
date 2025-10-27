@@ -1,6 +1,6 @@
-# URL Shortener
+# URL Shortener API
 
-A lightweight **Serverless URL Shortener** built with **AWS Lambda**, **API Gateway (HTTP API)**, and **DynamoDB**, using the **Serverless Framework v3**.
+A lightweight **Serverless URL Shortener API** built with **AWS Lambda**, **API Gateway (HTTP API)**, and **DynamoDB**, using the **Serverless Framework v3**.
 
 This service provides two main endpoints:
 

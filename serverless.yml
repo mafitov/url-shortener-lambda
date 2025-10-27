@@ -12,6 +12,23 @@ provider:
     lambdaHashingVersion: 20201221
     environment:
         URL_TABLE: ${self:service}-${sls:stage}-urls
+    httpApi:
+        cors:
+            allowedOrigins: '*'
+            allowedHeaders:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+            allowedMethods:
+                - OPTIONS
+                - GET
+                - POST
+                - PUT
+                - DELETE
+            allowCredentials: false
     iam:
         role:
             statements:
