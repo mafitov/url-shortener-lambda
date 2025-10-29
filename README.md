@@ -23,11 +23,11 @@ Client ─▶ API Gateway (HTTP API)
 
 ## Configuration
 
-**Service name:** `url-shortener`
-**Framework version:** `3`
-**Runtime:** `Node.js 20.x`
-**Region:** `eu-central-1`
-**Stage:** `dev`
+* **Service name:** `url-shortener`
+* **Framework version:** `3`
+* **Runtime:** `Node.js 20.x`
+* **Region:** `eu-central-1`
+* **Stage:** `dev`
 
 ## Environment Variables
 
@@ -67,17 +67,17 @@ iam:
 
 ### 1. `url-create`
 
-**Handler:** `src/functions/url-create.handler`
-**Method:** `POST /`
+* **Handler:** `src/functions/url-create.handler`
+* **Method:** `POST /urls`
 
 Creates a new short URL entry in DynamoDB.
 
 ### Example Request
 
 ```bash
-curl -X POST https://<api-id>.execute-api.eu-central-1.amazonaws.com/ \
+curl -X POST https://<api-id>.execute-api.eu-central-1.amazonaws.com/urls \
   -H "Content-Type: application/json" \
-  -d '{"url": "https://example.com"}'
+  -d '{"longUrl": "https://example.com"}'
 ```
 
 ### Example Response
@@ -90,8 +90,8 @@ curl -X POST https://<api-id>.execute-api.eu-central-1.amazonaws.com/ \
 
 ### 2. `url-get`
 
-**Handler:** `src/functions/url-get.handler`
-**Method:** `GET /{hash}`
+* **Handler:** `src/functions/url-get.handler`
+* **Method:** `GET /urls/{hash}`
 
 Fetches the original URL from DynamoDB using the short hash.
 If found, it redirects to the long URL.
@@ -99,13 +99,13 @@ If found, it redirects to the long URL.
 ### Example Request
 
 ```bash
-curl -i https://<api-id>.execute-api.eu-central-1.amazonaws.com/abc123
+curl -i https://<api-id>.execute-api.eu-central-1.amazonaws.com/urls/abc123
 ```
 
 ### Example Response
 
 ```
-HTTP/1.1 302 Found
+HTTP/1.1 301 Moved Permanently
 Location: https://example.com
 ```
 
