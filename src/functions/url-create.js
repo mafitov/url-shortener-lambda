@@ -14,7 +14,7 @@ exports.handler = async (event) => {
         const urlResult = await dynamoDb.createShortUrl(data.longUrl, data.ttl);
 
         return response.created({
-            shortUrl: `https://${event.requestContext.domainName}/${urlResult.Item.hash}`
+            shortUrl: `https://${event.requestContext.domainName}/urls/${urlResult.Item.hash}`
         });
     } catch (error) {
         return response.serverError(error);

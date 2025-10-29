@@ -1,4 +1,4 @@
-service: url-shortener
+service: url-shortener-api
 frameworkVersion: '3'
 package:
     individually: true
@@ -43,13 +43,13 @@ functions:
             handler: src/functions/url-create.handler
             events:
                 -   httpApi:
-                        path: /
+                        path: /urls
                         method: post
     -   url-get:
             handler: src/functions/url-get.handler
             events:
                 -   httpApi:
-                        path: /{hash}
+                        path: /urls/{hash}
                         method: get
 resources:
     -   Resources:
